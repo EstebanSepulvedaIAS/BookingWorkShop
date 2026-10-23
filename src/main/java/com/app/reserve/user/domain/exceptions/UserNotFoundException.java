@@ -1,0 +1,7 @@
+package com.app.reserve.user.domain.exceptions;
+
+public class UserNotFoundException extends RuntimeException {
+    public UserNotFoundException(String message) {
+        super(message);
+    }
+}
