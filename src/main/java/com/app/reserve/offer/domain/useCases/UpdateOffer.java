@@ -6,4 +6,5 @@ import reactor.core.publisher.Mono;
 public interface UpdateOffer {
     Mono<Void> updateOffer(Offer offer);
     Mono<Offer> updateOfferByTitle(String title);
+    Mono<Void> removeOfferById(String offerId);
 }
