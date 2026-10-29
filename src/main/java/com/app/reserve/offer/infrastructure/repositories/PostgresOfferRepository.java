@@ -5,6 +5,7 @@ import com.app.reserve.offer.domain.OfferRepository;
 import com.app.reserve.offer.domain.exceptions.OfferNotFoundException;
 import com.app.reserve.offer.infrastructure.entities.OfferMapper;
 import com.app.reserve.shared.domain.Id;
+import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,15 +16,17 @@ import java.util.UUID;
 public class PostgresOfferRepository implements OfferRepository {
 
     private final JpaOfferRepository jpaOfferRepository;
+    private final R2dbcEntityTemplate r2dbcEntityTemplate;
 
-    public PostgresOfferRepository(JpaOfferRepository jpaOfferRepository) {
+    public PostgresOfferRepository(JpaOfferRepository jpaOfferRepository, R2dbcEntityTemplate r2dbcEntityTemplate) {
         this.jpaOfferRepository = jpaOfferRepository;
+        this.r2dbcEntityTemplate = r2dbcEntityTemplate;
     }
 
     @Override
     public Mono<Void> save(Offer offer) {
         var offersEntity = OfferMapper.toOfferEntity(offer);
-        return jpaOfferRepository.save(offersEntity).then();
+        return r2dbcEntityTemplate.insert(offersEntity).then();
     }
 
     @Override
@@ -60,7 +63,7 @@ public class PostgresOfferRepository implements OfferRepository {
                     existingEntity.setTitle(
                             incomingEntity.getTitle() != null ? incomingEntity.getTitle() : existingEntity.getTitle()
                     );
-                    return jpaOfferRepository.save(existingEntity);
+                    return r2dbcEntityTemplate.insert(existingEntity);
                 })
                 .then();
     }
@@ -85,6 +88,4 @@ public class PostgresOfferRepository implements OfferRepository {
                 .switchIfEmpty(Mono.error(new OfferNotFoundException("Offer not found")))
                 .then();
     }
-
-
 }

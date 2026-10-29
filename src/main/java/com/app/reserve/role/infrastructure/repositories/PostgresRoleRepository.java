@@ -24,8 +24,7 @@ public class PostgresRoleRepository implements RoleRepository {
     @Override
     public Mono<Void> save(Role role) {
         var rollEntity = RoleMapper.toRoleEntity(role);
-        return jpaRoleRepository.save(rollEntity).then();
-        //return r2dbcEntityTemplate.insert(rollEntity).then();
+        return r2dbcEntityTemplate.insert(rollEntity).then();
     }
 
     @Override
