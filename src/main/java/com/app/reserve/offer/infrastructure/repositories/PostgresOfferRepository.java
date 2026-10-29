@@ -63,7 +63,7 @@ public class PostgresOfferRepository implements OfferRepository {
                     existingEntity.setTitle(
                             incomingEntity.getTitle() != null ? incomingEntity.getTitle() : existingEntity.getTitle()
                     );
-                    return r2dbcEntityTemplate.insert(existingEntity);
+                    return r2dbcEntityTemplate.update(existingEntity);
                 })
                 .then();
     }

@@ -37,7 +37,7 @@ public class OfferController {
     }
 
     @GetMapping
-    public Flux<ResponseEntity<OfferResponse>> getOffers(){
+    public Flux<OfferResponse> getOffers(){
         return offerRetriever.getAllOffers()
                 .map(offer -> new OfferResponse(
                         offer.getId(),
@@ -47,8 +47,7 @@ public class OfferController {
                         offer.getState(),
                         offer.getTitle()
                 ))
-                .doOnComplete(() -> log.info("Offers retrieved successfully"))
-                .map(ResponseEntity::ok);
+                .doOnComplete(() -> log.info("Offers retrieved successfully"));
     }
 
     @GetMapping("/{id}")

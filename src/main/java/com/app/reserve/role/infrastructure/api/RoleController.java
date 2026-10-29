@@ -30,10 +30,9 @@ public class RoleController {
     }
 
     @GetMapping
-    public Flux<ResponseEntity<RoleResponse>> getRoles(){
+    public Flux<RoleResponse> getRoles(){
         return roleRetriever.getAllRoles()
                 .map(role -> new RoleResponse(role.getId(), role.getName()))
-                .doOnComplete(() -> log.info("Roles retrieved successfully"))
-                .map(ResponseEntity::ok);
+                .doOnComplete(() -> log.info("Roles retrieved successfully"));
     }
 }
