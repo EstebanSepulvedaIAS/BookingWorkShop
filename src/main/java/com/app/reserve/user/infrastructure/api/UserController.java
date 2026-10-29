@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @GetMapping
-    public Flux<UserResponse> getUsers(){
+    public Flux<ResponseEntity<UserResponse>> getUsers(){
         return userRetriever.getAllUsers()
                 .map(user -> new UserResponse(
                         user.getId(),
@@ -58,7 +58,8 @@ public class UserController {
                         user.getPassword(),
                         user.getName()
                 ))
-                .doOnComplete(() -> log.info("Users retrieved successfully"));
+                .doOnComplete(() -> log.info("Users retrieved successfully"))
+                .map(ResponseEntity::ok);
     }
 
     @PutMapping("/role")

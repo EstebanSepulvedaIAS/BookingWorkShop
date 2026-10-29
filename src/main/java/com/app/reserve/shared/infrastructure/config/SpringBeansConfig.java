@@ -1,8 +1,17 @@
 package com.app.reserve.shared.infrastructure.config;
 
+import com.app.reserve.offer.application.OfferCreator;
+import com.app.reserve.offer.application.OfferDeleter;
+import com.app.reserve.offer.application.OfferRetriever;
+import com.app.reserve.offer.application.OfferUpdater;
+import com.app.reserve.offer.domain.OfferRepository;
 import com.app.reserve.role.application.RoleCreator;
 import com.app.reserve.role.application.RoleRetriever;
 import com.app.reserve.role.domain.RoleRepository;
+import com.app.reserve.user.application.UserCreator;
+import com.app.reserve.user.application.UserRetriever;
+import com.app.reserve.user.application.UserUpdater;
+import com.app.reserve.user.domain.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -30,5 +39,26 @@ public class SpringBeansConfig {
     public RoleRetriever roleRetriever(RoleRepository roleRepository) {
         return new RoleRetriever(roleRepository);
     }
+
+    @Bean
+    public UserCreator userCreator(UserRepository userRepository){return new UserCreator(userRepository);}
+
+    @Bean
+    public UserRetriever userRetriever(UserRepository userRepository){return new UserRetriever(userRepository);}
+
+    @Bean
+    public UserUpdater userUpdater(UserRepository userRepository, RoleRepository roleRepository){return new UserUpdater(userRepository, roleRepository);}
+
+    @Bean
+    public OfferCreator offerCreator(OfferRepository offerRepository){return new OfferCreator(offerRepository);}
+
+    @Bean
+    public OfferRetriever offerRetriever(OfferRepository offerRepository){return new OfferRetriever(offerRepository);}
+
+    @Bean
+    public OfferUpdater offerUpdater(OfferRepository offerRepository){return new OfferUpdater(offerRepository);}
+
+    @Bean
+    public OfferDeleter offerDeleter(OfferRepository offerRepository){return new OfferDeleter(offerRepository);}
 
 }

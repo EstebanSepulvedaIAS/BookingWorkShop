@@ -24,6 +24,9 @@ public class OfferEntity {
     @Column(name = "quantity")
     private int quantity;
 
+    @Column(name = "available_quantity")
+    private int availableQuantity;
+
     @Column(name = "date")
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime date;

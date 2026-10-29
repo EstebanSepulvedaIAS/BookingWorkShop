@@ -7,4 +7,5 @@ import reactor.core.publisher.Mono;
 public interface RetrieveOffer{
     Flux<Offer> getAllOffers();
     Mono<Offer> getOffer(String offerId);
+    Mono<Offer> retrieveByTitle(String title);
 }

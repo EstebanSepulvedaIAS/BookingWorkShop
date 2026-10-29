@@ -10,6 +10,7 @@ public class OfferMapper {
         return new OfferEntity(
                 offer.getId(),
                 offer.getQuantity(),
+                offer.getAvailableQuantity(),
                 offer.getDate(),
                 offer.getState(),
                 offer.getTitle()
@@ -20,6 +21,7 @@ public class OfferMapper {
         return Offer.create(
                 offerEntity.getId().toString(),
                 offerEntity.getQuantity(),
+                offerEntity.getAvailableQuantity(),
                 offerEntity.getDate(),
                 offerEntity.isState(),
                 offerEntity.getTitle()

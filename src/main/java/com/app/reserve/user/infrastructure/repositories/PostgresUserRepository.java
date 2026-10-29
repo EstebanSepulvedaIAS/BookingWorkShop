@@ -10,11 +10,13 @@ import com.app.reserve.user.domain.exceptions.RoleNotFoundException;
 import com.app.reserve.user.domain.exceptions.UserNotFoundException;
 import com.app.reserve.user.infrastructure.entities.UserMapper;
 import com.app.reserve.user.infrastructure.entities.UserRoleEntity;
+import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
+@Repository
 public class PostgresUserRepository implements UserRepository {
 
     private final JpaUserRepository jpaUserRepository;
