@@ -12,5 +12,3 @@ services:
     volumes:
       - ./reservasCreate.ddl:/docker-entrypoint-initdb.d/01-init.sql:ro
       - postgres_data:/var/lib/postgresql/data
-  volumes:
-    postgres_data: {}
