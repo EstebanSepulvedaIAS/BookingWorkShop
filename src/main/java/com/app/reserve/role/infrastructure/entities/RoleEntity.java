@@ -1,11 +1,12 @@
 package com.app.reserve.role.infrastructure.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.domain.Persistable;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.UUID;
 
@@ -13,9 +14,8 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(name = "\"Role\"")
-public class RoleEntity{
+public class RoleEntity {
     @Id
     @Column(name = "id")
     private UUID id;

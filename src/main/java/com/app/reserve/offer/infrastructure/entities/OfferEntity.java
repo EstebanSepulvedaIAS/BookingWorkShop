@@ -1,10 +1,13 @@
 package com.app.reserve.offer.infrastructure.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -13,7 +16,6 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(name = "\"Offer\"")
 public class OfferEntity {
 
@@ -28,7 +30,7 @@ public class OfferEntity {
     private int availableQuantity;
 
     @Column(name = "date")
-    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
     private LocalDateTime date;
 
     @Column(name = "state")

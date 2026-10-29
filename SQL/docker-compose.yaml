@@ -11,4 +11,4 @@ services:
       - "5432:5432"
     volumes:
       - ./reservasCreate.ddl:/docker-entrypoint-initdb.d/01-init.sql:ro
-      - postgres_data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql/data
