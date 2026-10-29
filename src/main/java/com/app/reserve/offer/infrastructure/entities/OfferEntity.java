@@ -1,12 +1,12 @@
 package com.app.reserve.offer.infrastructure.entities;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
@@ -20,22 +20,22 @@ import java.util.UUID;
 public class OfferEntity {
 
     @Id
-    @Column(name = "id")
+    @Column("id")
     private UUID id;
 
-    @Column(name = "quantity")
+    @Column("quantity")
     private int quantity;
 
-    @Column(name = "available_quantity")
+    @Column("available_quantity")
     private int availableQuantity;
 
-    @Column(name = "date")
+    @Column("date")
     @CreatedDate
     private LocalDateTime date;
 
-    @Column(name = "state")
+    @Column("state")
     private boolean state;
 
-    @Column(name = "title")
+    @Column("title")
     private String title;
 }

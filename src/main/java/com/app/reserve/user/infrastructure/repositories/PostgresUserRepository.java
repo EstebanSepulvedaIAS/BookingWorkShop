@@ -48,8 +48,8 @@ public class PostgresUserRepository implements UserRepository {
                 .flatMap(userEntity -> {
                     var user = UserMapper.toDomainUser(userEntity);
                     return jpaUserRoleRepository.findAllByUserEntity(userEntity)
-                            .flatMap(userRoleEntity -> jpaRoleRepository.findById(userRoleEntity.getRoleEntity().getId())
-                                    .switchIfEmpty(Mono.error(new RoleNotFoundException("Role: " + userRoleEntity.getRoleEntity().getName() + " no exists")))
+                            .flatMap(userRoleEntity -> jpaRoleRepository.findById(userRoleEntity.getRoleEntity())
+                                    .switchIfEmpty(Mono.error(new RoleNotFoundException("Role: " + userRoleEntity.getRoleEntity().toString() + " no exists")))
                                     .doOnNext(roleEntity -> user.addRole(RoleMapper.toDomainRole(roleEntity)))
                             )
                             .then().thenReturn(user);
@@ -66,7 +66,7 @@ public class PostgresUserRepository implements UserRepository {
     public Mono<Void> addRoleToUser(User user, Role role) {
         var userEntity = UserMapper.toUserEntity(user);
         var roleEntity = RoleMapper.toRoleEntity(role);
-        var userRoleEntity = new UserRoleEntity(UUID.randomUUID(), userEntity, roleEntity);
+        var userRoleEntity = new UserRoleEntity(UUID.randomUUID(), userEntity.getId(), roleEntity.getId());
         return jpaUserRoleRepository.save(userRoleEntity).then();
     }
 }

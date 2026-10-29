@@ -1,14 +1,12 @@
 package com.app.reserve.user.infrastructure.entities;
 
 import com.app.reserve.role.infrastructure.entities.RoleEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.UUID;
@@ -21,14 +19,12 @@ import java.util.UUID;
 public class UserRoleEntity {
 
     @Id
-    @Column(name = "user_role_id")
+    @Column("user_role_id")
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", updatable = false)
-    private UserEntity userEntity;
+    @Column("user_id")
+    private UUID userEntity;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", updatable = false)
-    private RoleEntity roleEntity;
+    @Column("role_id")
+    private UUID roleEntity;
 }
