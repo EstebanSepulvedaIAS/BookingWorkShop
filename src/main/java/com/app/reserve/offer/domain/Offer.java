@@ -56,12 +56,10 @@ public class Offer {
     }
 
     public void reduceQuantityOffer(){
-        this.quantity = this.quantity.reducePersonsForOffer();
+        this.availableQuantity = this.availableQuantity.reducePersonsForOffer();
     }
 
-    public void incrementQuantityOffer(){
-        this.quantity = this.quantity.incrementPersonsForOffer();
-    }
+    public void incrementQuantityOffer(){this.availableQuantity = this.availableQuantity.incrementPersonsForOffer();}
 
     @Override
     public String toString() {

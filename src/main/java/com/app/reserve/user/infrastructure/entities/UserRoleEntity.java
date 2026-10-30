@@ -1,6 +1,5 @@
 package com.app.reserve.user.infrastructure.entities;
 
-import com.app.reserve.role.infrastructure.entities.RoleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
