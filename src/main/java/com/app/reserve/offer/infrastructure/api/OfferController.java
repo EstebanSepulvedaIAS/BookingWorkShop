@@ -62,13 +62,13 @@ public class OfferController {
                             offer.getState(),
                             offer.getTitle()
                     );
-                    log.info("Offer retrieved: {} {}", offer.getTitle());
+                    log.info("Offer retrieved: {}", offer.getTitle());
                     return ResponseEntity.ok().body(offerResponse);
                 })
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/{title}")
+    @GetMapping("/title/{title}")
     public Mono<ResponseEntity<OfferResponse>> retrieveOfferByTitle(@PathVariable("title") String title){
         return offerRetriever.retrieveByTitle(title)
                 .map(offer -> new OfferResponse(
@@ -83,7 +83,7 @@ public class OfferController {
                 .map(ResponseEntity::ok);
     }
 
-    @PutMapping("/{title}")
+    @PutMapping("/update/{title}")
     public Mono<ResponseEntity<Void>> updateOfferByTitle(@PathVariable("title") String title, @RequestBody OfferInput offerInput){
         return offerUpdater.updateOfferByTitle(
                 title,
@@ -100,7 +100,7 @@ public class OfferController {
                 .thenReturn(ResponseEntity.noContent().build());
     }
 
-    @DeleteMapping("/cancel/{id}")
+    @PutMapping("/cancel/{id}")
     public Mono<ResponseEntity<Void>> deleteSoftOffer(@PathVariable("id") String id){
         return offerDeleter.softDelete(id)
                 .doOnSuccess(unused -> log.info("Offer cancelled: {}", id))

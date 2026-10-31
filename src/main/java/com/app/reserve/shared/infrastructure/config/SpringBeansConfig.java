@@ -1,5 +1,10 @@
 package com.app.reserve.shared.infrastructure.config;
 
+import com.app.reserve.booking.application.BookingCreator;
+import com.app.reserve.booking.application.BookingDeleter;
+import com.app.reserve.booking.application.BookingRetriever;
+import com.app.reserve.booking.application.BookingUpdater;
+import com.app.reserve.booking.domain.BookingRepository;
 import com.app.reserve.offer.application.OfferCreator;
 import com.app.reserve.offer.application.OfferDeleter;
 import com.app.reserve.offer.application.OfferRetriever;
@@ -61,4 +66,15 @@ public class SpringBeansConfig {
     @Bean
     public OfferDeleter offerDeleter(OfferRepository offerRepository){return new OfferDeleter(offerRepository);}
 
+    @Bean
+    public BookingCreator bookingCreator(BookingRepository bookingRepository){return new BookingCreator(bookingRepository);}
+
+    @Bean
+    public BookingRetriever bookingRetriever(BookingRepository bookingRepository){return new BookingRetriever(bookingRepository);}
+
+    @Bean
+    public BookingUpdater bookingUpdater(BookingRepository bookingRepository){return new BookingUpdater(bookingRepository);}
+
+    @Bean
+    public BookingDeleter bookingDeleter(BookingRepository bookingRepository){return new BookingDeleter(bookingRepository);}
 }
