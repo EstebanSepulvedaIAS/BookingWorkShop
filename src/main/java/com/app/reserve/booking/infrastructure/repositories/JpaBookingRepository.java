@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public interface JpaBookingRepository extends ReactiveCrudRepository<BookingEntity, UUID> {
     @Modifying
-    @Query("UPDATE \"Booking\" SET status = 'CANCELLED', cancelled_at = CURRENT_TIMESTAMP WHERE id = :id AND status = 'BOOKED'")
+    @Query("UPDATE booking SET status = 'CANCELLED', cancelled_at = CURRENT_TIMESTAMP WHERE id = :id AND status = 'BOOKED'")
     Mono<Integer> cancelledBookingById(@Param("id") UUID id);
 
     Mono<Boolean> existsByUserIdAndStatus(UUID userId, String status);

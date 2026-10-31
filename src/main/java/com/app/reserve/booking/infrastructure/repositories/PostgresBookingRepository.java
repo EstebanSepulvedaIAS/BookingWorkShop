@@ -61,7 +61,7 @@ public class PostgresBookingRepository implements BookingRepository {
 
     @Override
     public Mono<Void> cancelledBookingById(Id id) {
-        UUID bookingIdUUID = UUID.fromString(id.toString());
+        UUID bookingIdUUID = id.value();
         LocalDateTime now = LocalDateTime.now();
         return jpaBookingRepository.findById(bookingIdUUID)
                 .switchIfEmpty(Mono.error(() -> new BookingException("Booking not found with id: " + id.value())))
