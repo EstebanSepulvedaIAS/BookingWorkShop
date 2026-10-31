@@ -64,7 +64,27 @@ public class PostgresBookingRepository implements BookingRepository {
         UUID bookingIdUUID = UUID.fromString(id.toString());
         LocalDateTime now = LocalDateTime.now();
         return jpaBookingRepository.findById(bookingIdUUID)
-                .switchIfEmpty(Mono.error(() -> ))
+                .switchIfEmpty(Mono.error(() -> new BookingException("Booking not found with id: " + id.value())))
+                .flatMap(bookingEntity -> {
+                    if("CANCELLED".equalsIgnoreCase(bookingEntity.getStatus())){
+                        return Mono.error(new BookingException("The booking it´s already cancelled and cannot cancelled again"));
+                    }
+                    UUID offerIdUUID = bookingEntity.getOfferId();
+                    return jpaOfferRepository.findById(offerIdUUID)
+                            .switchIfEmpty(Mono.error(() -> new OfferNotFoundException("Offer not found")))
+                            .flatMap(offerEntity -> {
+                                if(offerEntity.getDate() != null && !now.plusHours(24).isBefore(offerEntity.getDate())){
+                                    return Mono.error(new BookingException(
+                                            "No it´s possible cancelled this booking, you needs a minimum 24 hours to will cancel"
+                                    ));
+                                }
+                                return jpaBookingRepository.cancelledBookingById(bookingIdUUID)
+                                        .filter(rowsUpdate -> rowsUpdate > 0)
+                                        .switchIfEmpty(Mono.error(() -> new BookingException("Cannot update the status in the booking")))
+                                        .then(jpaOfferRepository.incrementAvailableQuantity(offerIdUUID))
+                                        .then();
+                            });
+                });
     }
 
     @Override
