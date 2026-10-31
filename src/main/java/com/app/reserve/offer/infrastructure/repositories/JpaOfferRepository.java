@@ -18,4 +18,12 @@ public interface JpaOfferRepository extends ReactiveCrudRepository<OfferEntity, 
     @Modifying
     @Query("UPDATE \"Offer\" SET state = false WHERE id = :id AND state = true")
     Mono<Boolean> softDeleteById(@Param("id") UUID id);
+
+    @Modifying
+    @Query("UPDATE \"Offer\" SET available_quantity = available_quantity - 1 WHERE id = :id and available_quantity > 0 AND state = true")
+    Mono<Boolean> decrementAvailableQuantity(@Param("id") UUID id);
+
+    @Modifying
+    @Query("UPDATE \"Offer\" SET available_quantity = available_quantity + 1 WHERE id = :id")
+    Mono<Boolean> incrementAvailableQuantity(@Param("id") UUID id);
 }
