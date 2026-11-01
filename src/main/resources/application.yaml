@@ -3,6 +3,12 @@ security:
     user: esteban_user
     key: esteban_key
 
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
 spring:
   application:
     name: reserve
