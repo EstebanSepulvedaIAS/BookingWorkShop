@@ -34,6 +34,10 @@ public class SpringSecurityConfig {
 
                     exchanges.pathMatchers(HttpMethod.GET, "/").permitAll();
                     exchanges.pathMatchers(HttpMethod.POST, "/auth/login").permitAll();
+                    exchanges.pathMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll();
+                    exchanges.pathMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll();
+                    exchanges.pathMatchers(HttpMethod.GET, "/v3/api-docs/**").permitAll();
+                    exchanges.pathMatchers(HttpMethod.POST, "/auth/login").permitAll();
 
                     // Private endpoints
 
