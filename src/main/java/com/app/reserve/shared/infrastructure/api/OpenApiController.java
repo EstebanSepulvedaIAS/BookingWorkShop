@@ -16,7 +16,7 @@ public class OpenApiController {
     @Parameter(hidden = true)
     public Mono<Void> index(ServerHttpResponse response){
         response.setStatusCode(HttpStatus.FOUND);
-        response.getHeaders().setLocation(URI.create("/swagger-ui,html"));
+        response.getHeaders().setLocation(URI.create("/swagger-ui.html"));
         return response.setComplete();
     }
 }
