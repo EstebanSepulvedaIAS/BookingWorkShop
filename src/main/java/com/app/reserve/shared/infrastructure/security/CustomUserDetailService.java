@@ -38,7 +38,7 @@ public class CustomUserDetailService implements ReactiveUserDetailsService {
                 .switchIfEmpty(Mono.error(() -> new UsernameNotFoundException("The user with the email " + username + " doesn't exist")))
                 .map(user -> {
                     Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-                    user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority("ROLE_" + role)));
+                    user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName())));
                     return new CustomUserDetails(user.getEmail(), user.getPassword(), authorities);
                 })
                 .cast(UserDetails.class);

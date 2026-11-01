@@ -18,9 +18,9 @@ public class UserMapper {
     public static User toDomainUser(UserEntity userEntity){
         return User.create(
                 userEntity.getId().toString(),
-                userEntity.getName(),
                 userEntity.getEmail(),
-                userEntity.getPassword()
+                userEntity.getPassword(),
+                userEntity.getName()
         );
     }
 }

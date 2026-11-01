@@ -11,6 +11,7 @@ import com.app.reserve.user.domain.exceptions.UserNotFoundException;
 import com.app.reserve.user.infrastructure.entities.UserMapper;
 import com.app.reserve.user.infrastructure.entities.UserRoleEntity;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -23,18 +24,21 @@ public class PostgresUserRepository implements UserRepository {
     private final JpaUserRepository jpaUserRepository;
     private final JpaUserRoleRepository jpaUserRoleRepository;
     private final JpaRoleRepository jpaRoleRepository;
+    private final PasswordEncoder passwordEncoder;
     private final R2dbcEntityTemplate r2dbcEntityTemplate;
 
-    public PostgresUserRepository(JpaUserRepository jpaUserRepository, JpaUserRoleRepository jpaUserRoleRepository, JpaRoleRepository jpaRoleRepository, R2dbcEntityTemplate r2dbcEntityTemplate) {
+    public PostgresUserRepository(JpaUserRepository jpaUserRepository, JpaUserRoleRepository jpaUserRoleRepository, JpaRoleRepository jpaRoleRepository, PasswordEncoder passwordEncoder, R2dbcEntityTemplate r2dbcEntityTemplate) {
         this.jpaUserRepository = jpaUserRepository;
         this.jpaUserRoleRepository = jpaUserRoleRepository;
         this.jpaRoleRepository = jpaRoleRepository;
         this.r2dbcEntityTemplate = r2dbcEntityTemplate;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public Mono<Void> save(User user) {
         var usersEntity = UserMapper.toUserEntity(user);
+        usersEntity.setPassword(passwordEncoder.encode(user.getPassword()));
         return r2dbcEntityTemplate.insert(usersEntity).then();
     }
 

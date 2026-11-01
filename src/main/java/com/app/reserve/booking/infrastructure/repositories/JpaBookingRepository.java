@@ -14,5 +14,5 @@ public interface JpaBookingRepository extends ReactiveCrudRepository<BookingEnti
     @Query("UPDATE booking SET status = 'CANCELLED', cancelled_at = CURRENT_TIMESTAMP WHERE id = :id AND status = 'BOOKED'")
     Mono<Integer> cancelledBookingById(@Param("id") UUID id);
 
-    Mono<Boolean> existsByUserIdAndStatus(UUID userId, String status);
+    Mono<Boolean> existsByUserIdAndOfferIdAndStatus(UUID userId, UUID offerId, String status);
 }

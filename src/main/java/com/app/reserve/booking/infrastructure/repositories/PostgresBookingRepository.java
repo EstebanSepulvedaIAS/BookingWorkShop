@@ -39,7 +39,7 @@ public class PostgresBookingRepository implements BookingRepository {
         UUID offerIdUUID = UUID.fromString(booking.getOfferId().toString());
         return checkIdempotency(bookingIdUUID, offerIdUUID, userIdUUID)
                 .switchIfEmpty(Mono.defer(() ->
-                        validateUserHasNoActiveBooking(userIdUUID)
+                        validateUserHasNoActiveBooking(userIdUUID, offerIdUUID)
                                 .then(findAndValidateOffer(offerIdUUID))
                                 .then(decrementOfferQuota(offerIdUUID))
                                 .then(insertBookingEntity(booking))
@@ -109,8 +109,8 @@ public class PostgresBookingRepository implements BookingRepository {
                 });
     }
 
-    private Mono<Void> validateUserHasNoActiveBooking(UUID userId){
-        return jpaBookingRepository.existsByUserIdAndStatus(userId, "BOOKED")
+    private Mono<Void> validateUserHasNoActiveBooking(UUID userId, UUID offerId){
+        return jpaBookingRepository.existsByUserIdAndOfferIdAndStatus(userId, offerId, "BOOKED")
                 .flatMap(hasActiveBooking -> Boolean.TRUE.equals(hasActiveBooking)
                         ? Mono.error(new BookingException("The user have already booking active"))
                         : Mono.empty()
