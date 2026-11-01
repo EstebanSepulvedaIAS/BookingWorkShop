@@ -13,13 +13,15 @@ services:
       - ../SQL/reservasCreate.ddl:/docker-entrypoint-initdb.d/01-init.sql:ro
       - ../SQL/postgres_data:/var/lib/postgresql/data
 
-  reserve_backend:
-    build: .
-    container_name: java_backend
+  reserve-backend:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile
+    container_name: java-backend
     ports:
       - "8080:8080"
     environment:
-      DB_URL: r2dbc:postgresql://postgres_db:5433/reserve_db
+      DB_URL: r2dbc:postgresql://postgres-db:5433/reserve_db
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
     depends_on:

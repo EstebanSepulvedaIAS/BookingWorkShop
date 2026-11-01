@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21-jdk-alpine as build
+FROM eclipse-temurin:21-jdk-alpine AS build
 WORKDIR /app
 
 COPY ../gradlew .
@@ -13,7 +13,7 @@ RUN ./gradlew dependencies --no-daemon || true
 
 COPY ../src src
 
-run ./gradlew build -x test --no-daemon
+RUN ./gradlew build -x test --no-daemon
 
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
