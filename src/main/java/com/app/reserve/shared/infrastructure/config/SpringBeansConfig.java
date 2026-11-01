@@ -19,16 +19,17 @@ import com.app.reserve.user.application.UserUpdater;
 import com.app.reserve.user.domain.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.reactive.config.CorsRegistry;
+import org.springframework.web.reactive.config.WebFluxConfigurer;
 
 @Configuration
 public class SpringBeansConfig {
 
     @Bean
-    public WebMvcConfigurer corsConfigurer(){
-        return new WebMvcConfigurer() {
-            public void addCorsMappings(CorsRegistry registry){
+    public WebFluxConfigurer corsConfigurer() {
+        return new WebFluxConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedMethods("GET", "POST", "PUT", "DELETE");
             }
@@ -46,35 +47,57 @@ public class SpringBeansConfig {
     }
 
     @Bean
-    public UserCreator userCreator(UserRepository userRepository){return new UserCreator(userRepository);}
+    public UserCreator userCreator(UserRepository userRepository) {
+        return new UserCreator(userRepository);
+    }
 
     @Bean
-    public UserRetriever userRetriever(UserRepository userRepository){return new UserRetriever(userRepository);}
+    public UserRetriever userRetriever(UserRepository userRepository) {
+        return new UserRetriever(userRepository);
+    }
 
     @Bean
-    public UserUpdater userUpdater(UserRepository userRepository, RoleRepository roleRepository){return new UserUpdater(userRepository, roleRepository);}
+    public UserUpdater userUpdater(UserRepository userRepository, RoleRepository roleRepository) {
+        return new UserUpdater(userRepository, roleRepository);
+    }
 
     @Bean
-    public OfferCreator offerCreator(OfferRepository offerRepository){return new OfferCreator(offerRepository);}
+    public OfferCreator offerCreator(OfferRepository offerRepository) {
+        return new OfferCreator(offerRepository);
+    }
 
     @Bean
-    public OfferRetriever offerRetriever(OfferRepository offerRepository){return new OfferRetriever(offerRepository);}
+    public OfferRetriever offerRetriever(OfferRepository offerRepository) {
+        return new OfferRetriever(offerRepository);
+    }
 
     @Bean
-    public OfferUpdater offerUpdater(OfferRepository offerRepository){return new OfferUpdater(offerRepository);}
+    public OfferUpdater offerUpdater(OfferRepository offerRepository) {
+        return new OfferUpdater(offerRepository);
+    }
 
     @Bean
-    public OfferDeleter offerDeleter(OfferRepository offerRepository){return new OfferDeleter(offerRepository);}
+    public OfferDeleter offerDeleter(OfferRepository offerRepository) {
+        return new OfferDeleter(offerRepository);
+    }
 
     @Bean
-    public BookingCreator bookingCreator(BookingRepository bookingRepository){return new BookingCreator(bookingRepository);}
+    public BookingCreator bookingCreator(BookingRepository bookingRepository) {
+        return new BookingCreator(bookingRepository);
+    }
 
     @Bean
-    public BookingRetriever bookingRetriever(BookingRepository bookingRepository){return new BookingRetriever(bookingRepository);}
+    public BookingRetriever bookingRetriever(BookingRepository bookingRepository) {
+        return new BookingRetriever(bookingRepository);
+    }
 
     @Bean
-    public BookingUpdater bookingUpdater(BookingRepository bookingRepository){return new BookingUpdater(bookingRepository);}
+    public BookingUpdater bookingUpdater(BookingRepository bookingRepository) {
+        return new BookingUpdater(bookingRepository);
+    }
 
     @Bean
-    public BookingDeleter bookingDeleter(BookingRepository bookingRepository){return new BookingDeleter(bookingRepository);}
+    public BookingDeleter bookingDeleter(BookingRepository bookingRepository) {
+        return new BookingDeleter(bookingRepository);
+    }
 }
