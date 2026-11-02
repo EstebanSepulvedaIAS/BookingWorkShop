@@ -8,3 +8,10 @@ ALTER TABLE booking ADD CONSTRAINT FKBooking857470 FOREIGN KEY (user_id) REFEREN
 ALTER TABLE user_role ADD CONSTRAINT FKUser_Role39262 FOREIGN KEY (role_id) REFERENCES role (id);
 ALTER TABLE user_role ADD CONSTRAINT FKUser_Role964785 FOREIGN KEY (user_id) REFERENCES "User" (id);
 
+INSERT INTO role (id, name) VALUES (gen_random_uuid(), 'ADMIN');
+INSERT INTO role (id, name) VALUES (gen_random_uuid(), 'GESTOR');
+INSERT INTO role (id, name) VALUES (gen_random_uuid(), 'PARTICIPANTE');
+
+INSERT INTO "User" (id, name, email, password) VALUES (gen_random_uuid(), 'Admin', 'admin@reserves.com', '$2a$12$lnnDujfTBmEsg7N5NvAP3es4BYwgflhJVhgcDDultLfd/9PNCyweC');
+
+INSERT INTO user_role (user_role_id, user_id, role_id) SELECT gen_random_uuid(), u.id, r.id FROM "User" u CROSS JOIN role r WHERE u.email = 'admin@reserves.com' and r.name = 'ADMIN';
