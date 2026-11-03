@@ -13,7 +13,7 @@ spring:
   application:
     name: reserve
   r2dbc:
-    url: ${DB_URL:r2dbc:postgresql://localhost:5433/reserve_db}
+    url: ${DB_URL:r2dbc:postgresql://localhost:5432/reserve_db}
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:postgres}
     pool:
