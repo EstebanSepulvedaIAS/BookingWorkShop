@@ -54,7 +54,7 @@ public class SpringSecurityConfig {
                     exchanges.pathMatchers(HttpMethod.GET, "/api/offers/**").hasAnyRole("PARTICIPANTE", "ADMIN", "GESTOR");
                     exchanges.pathMatchers(HttpMethod.GET, "/api/offers/title/**").hasAnyRole("PARTICIPANTE", "ADMIN", "GESTOR");
                     exchanges.pathMatchers(HttpMethod.PUT, "/api/offers/update/**").hasAnyRole("ADMIN", "GESTOR");
-                    exchanges.pathMatchers(HttpMethod.PUT, "/api/offers/update/**").hasAnyRole("PARTICIPANTE", "ADMIN", "GESTOR");
+                    exchanges.pathMatchers(HttpMethod.PUT, "/api/offers/cancel/**").hasAnyRole("PARTICIPANTE", "ADMIN", "GESTOR");
                     exchanges.pathMatchers(HttpMethod.DELETE, "/api/offers/delete/**").hasAnyRole("ADMIN", "GESTOR");
 
                     exchanges.pathMatchers(HttpMethod.GET, "/api/booking").authenticated();
