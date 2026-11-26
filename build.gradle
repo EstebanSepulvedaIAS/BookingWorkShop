@@ -47,7 +47,7 @@ dependencies {
 sourceSets {
     test{
         java{
-            srcDir 'src/acceptanceTest/src/test/java'
+			srcDirs = ['src/test/java', 'src/acceptanceTest/src/test/java']
         }
         resources {
             srcDir 'src/acceptanceTest/src/test/resources'

@@ -1,0 +1,37 @@
+<section class="list-container">
+    <div class="list-header">
+        <div>
+            <span class="section-eyebrow">GESTIÓN DE ACCESO</span>
+            <h1 class="page-title">Roles de la organización</h1>
+        </div>
+
+        <a routerLink="/roles/create" class="btn-create">
+            <span>+</span>
+            <span>Crear nuevo rol</span>
+        </a>
+    </div>
+
+    <div class="roles-card">
+        @if (isLoading()) {
+        <div class="state-message">Cargando roles...</div>
+        } @else if (errorMessage()) {
+        <div class="state-message error">{{ errorMessage() }}</div>
+        } @else if (roles().length === 0) {
+        <div class="state-message">No hay roles registrados todavía.</div>
+        } @else {
+        <ul class="roles-list">
+            @for (role of roles(); track role.id) {
+            <li class="role-row">
+                <div class="role-badge" [class]="getBadgeClass(role.name)">
+                    {{ getInitials(role.name) }}
+                </div>
+                <div class="role-info">
+                    <span class="role-name">{{ role.name }}</span>
+                    <span class="role-description">{{ role.description }}</span>
+                </div>
+            </li>
+            }
+        </ul>
+        }
+    </div>
+</section>

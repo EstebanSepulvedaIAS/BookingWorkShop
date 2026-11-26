@@ -1,0 +1,52 @@
+<section class="create-container">
+    <a routerLink="/roles" class="back-link">
+        <span aria-hidden="true">&lsaquo;</span>
+        <span>Volver a roles</span>
+    </a>
+
+    <form class="create-card" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="card-header">
+            <div class="header-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+            </div>
+
+            <h1 class="card-title">¿Cuál rol deseas crear?</h1>
+            <p class="card-subtitle">
+                Dale un nombre claro para que tu equipo pueda identificarlo fácilmente.
+            </p>
+        </div>
+
+        <div class="card-body">
+            <div class="form-field">
+                <label for="role-name" class="field-label">
+                    Nombre del rol <span class="required">*</span>
+                </label>
+
+                <input id="role-name" type="text" formControlName="name" placeholder="Ej. Supervisor"
+                    class="field-input" autocomplete="off" />
+
+                <span class="field-hint">Usa un nombre corto y fácil de reconocer.</span>
+
+                @if (form.controls.name.touched && form.controls.name.invalid) {
+                <span class="field-error">El nombre del rol es obligatorio.</span>
+                }
+            </div>
+
+            @if (errorMessage()) {
+            <p class="submit-error" role="alert">{{ errorMessage() }}</p>
+            }
+        </div>
+
+        <div class="card-footer">
+            <a routerLink="/roles" class="btn-cancel">Cancelar</a>
+
+            <button type="submit" class="btn-submit" [disabled]="form.invalid || isSubmitting()">
+                <span aria-hidden="true">+</span>
+                <span>{{ isSubmitting() ? 'Creando...' : 'Crear rol' }}</span>
+            </button>
+        </div>
+    </form>
+</section>

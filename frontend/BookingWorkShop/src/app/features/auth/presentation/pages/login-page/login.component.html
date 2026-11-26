@@ -1,0 +1,8 @@
+<main>
+  <h1>Iniciar sesión</h1>
+  <app-login-form
+    [isLoading]="isLoading()"
+    [errorMessage]="errorMessage()"
+    (submitCredentials)="onLogin($event)"
+  />
+</main>

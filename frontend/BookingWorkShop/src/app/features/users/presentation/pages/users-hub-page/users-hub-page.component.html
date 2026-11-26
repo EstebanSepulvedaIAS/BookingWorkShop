@@ -1,0 +1,71 @@
+<section class="hub-container">
+    <span class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+        GESTIÓN DE USUARIOS
+    </span>
+
+    <h1 class="page-title">Usuarios</h1>
+    <p class="page-subtitle">
+        Administra las personas que tienen acceso a Booking Work Shop.
+    </p>
+
+    <div class="cards-grid">
+        <a routerLink="/users/list" class="action-card card-light">
+            <div class="card-icon icon-light">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="8" y1="6" x2="21" y2="6" />
+                    <line x1="8" y1="12" x2="21" y2="12" />
+                    <line x1="8" y1="18" x2="21" y2="18" />
+                    <line x1="3" y1="6" x2="3.01" y2="6" />
+                    <line x1="3" y1="12" x2="3.01" y2="12" />
+                    <line x1="3" y1="18" x2="3.01" y2="18" />
+                </svg>
+            </div>
+
+            <h2 class="card-title">Mostrar usuarios</h2>
+            <p class="card-description">
+                Consulta los usuarios, sus IDs y roles asignados.
+            </p>
+
+            <span class="card-link link-primary">Ver usuarios &rsaquo;</span>
+        </a>
+
+        <div class="action-card card-primary">
+            <div class="card-icon icon-primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+            </div>
+
+            <h2 class="card-title">Agregar usuario</h2>
+            <p class="card-description">
+                Registra un usuario con nombre, email y contraseña.
+            </p>
+
+            <span class="card-link link-light">Crear usuario &rsaquo;</span>
+        </div>
+
+        <div class="action-card card-light">
+            <div class="card-icon icon-amber">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="7.5" cy="15.5" r="5.5" />
+                    <path d="m21 2-9.6 9.6" />
+                    <path d="m15.5 7.5 3 3L22 7l-3-3" />
+                </svg>
+            </div>
+
+            <h2 class="card-title">Asignar un rol</h2>
+            <p class="card-description">
+                Asigna un rol usando el ID de un usuario.
+            </p>
+
+            <span class="card-link link-primary">Asignar rol &rsaquo;</span>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,49 @@
+<section class="list-container">
+  <div class="list-header">
+    <div>
+      <span class="section-eyebrow">GESTIÓN DE USUARIOS</span>
+      <h1 class="page-title">Usuarios registrados</h1>
+    </div>
+
+    <button type="button" class="btn-create">
+      <span>+</span>
+      <span>Agregar usuario</span>
+    </button>
+  </div>
+
+  <div class="users-card">
+    @if (isLoading()) {
+    <div class="state-message">Cargando usuarios...</div>
+    } @else if (errorMessage()) {
+    <div class="state-message error">{{ errorMessage() }}</div>
+    } @else if (users().length === 0) {
+    <div class="state-message">No hay usuarios registrados todavía.</div>
+    } @else {
+    <div class="table-wrapper">
+      <table class="users-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>USUARIO</th>
+            <th>EMAIL</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of users(); track user.id) {
+          <tr>
+            <td class="col-id">{{ user.id }}</td>
+            <td>
+              <div class="user-cell">
+                <span class="user-avatar">{{ getInitials(user.name) }}</span>
+                <span class="user-name">{{ user.name }}</span>
+              </div>
+            </td>
+            <td class="col-email">{{ user.email }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    }
+  </div>
+</section>
